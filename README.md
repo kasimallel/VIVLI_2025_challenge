@@ -6,9 +6,10 @@ Our work is titled: 'Estimating optimal empiric antibiotic therapy using a Bayes
 
 
 ## 📁 Project Structure
-
+```
 Project-root/
 ├── code/ → Full code of the modelling framework utilised and main outputs
 ├── supplementary materials / → PDF file containing supplementary analyses related to our research proposal
 ├── .gitignore
 └── README.md
+```
