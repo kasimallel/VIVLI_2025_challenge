@@ -1,12 +1,13 @@
 ## Contents
 
-This folder contains two main components:
+This folder includes two main files:
 
 1. **`multivariate_probit_model.stan`**  
-   This file contains the Bayesian multivariate probit model specification.
+   Contains the Bayesian multivariate probit model.
 
 2. **`run_antibiotic_model.R`**  
-   This R script defines a function to call the Bayesian model. It allows users to specify:
-   - The sample to be analyzed  
-   - The set of antibiotics included  
-   - The antibiotic used as a reference for non-inferiority comparisons
+   Provides a function to run the Bayesian model with customizable parameters:
+   - **Sample**: specify the dataset or subgroup to analyze  
+   - **Antibiotics**: select the antibiotics to include  
+   - **Reference**: define the reference antibiotic for non-inferiority analysis
+
