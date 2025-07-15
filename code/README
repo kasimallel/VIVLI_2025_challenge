@@ -1,6 +1,6 @@
 ## Contents
 
-This folder includes two main files:
+This folder includes four main files:
 
 1. **`multivariate_probit_model.stan`**  
    Contains the Bayesian multivariate probit model.
