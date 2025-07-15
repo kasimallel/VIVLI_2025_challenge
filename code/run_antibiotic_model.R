@@ -53,6 +53,10 @@ run_antibiotic_model <- function(data_input, antibiotics,
     )
   })
   
+  ###Non-inferiority probability // export to excel
+  Non_inf<- compute_noninfer_probabilities(suscept_df, antibiotics, reference=ref_abx)
+  write_csv(Non_inf, paste0(dataset_name, "_summary2", rand_tag, ".csv"))
+  
   estimated_df <- suscept_df %>%
     group_by(Antibiotic) %>%
     summarise(
@@ -205,6 +209,26 @@ run_antibiotic_model <- function(data_input, antibiotics,
     left_join(covariate_grid %>% mutate(ProfileID = row_number()), by = "ProfileID") %>%
     mutate(ProfileLabel = paste(Gender, Agegroup, Department_group, sep = " | "))
   
+  
+  # Generate long-format posterior draws for susceptibility per profile
+  draws_long2 <- purrr::map_dfr(1:n_profiles, function(i) {
+    purrr::map_dfr(1:D, function(j) {
+      tibble(
+        ProfileID = i,
+        Antibiotic = antibiotics[j],
+        Draw = 1:n_draws,
+        Suscept = pred_probs_array[, i, j]
+      )
+    })
+  }) %>%
+    left_join(covariate_grid %>% mutate(ProfileID = row_number()), by = "ProfileID") %>%
+    mutate(ProfileLabel = paste(Gender, Agegroup, Department_group, sep = " | "))
+  
+  
+  NonInfProfiles <- compute_profilewise_noninfer_probabilities(draws_long2, reference = ref_abx)
+  write_csv(NonInfProfiles, paste0(dataset_name, "_pfull", rand_tag, ".csv"))
+  
+  
   # === Step 6: Faceted Profile Plot ===
   ref_thresholds <- final_output %>%
     filter(Antibiotic == ref_abx) %>%
@@ -254,4 +278,3 @@ run_antibiotic_model <- function(data_input, antibiotics,
     profile_predictions = final_output
   ))
 }
-
