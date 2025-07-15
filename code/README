@@ -11,3 +11,14 @@ This folder includes two main files:
    - **Antibiotics**: select the antibiotics to include  
    - **Reference**: define the reference antibiotic for non-inferiority analysis
 
+3. **`compute_noninfer_probabilities.R`**  
+   Provides a function that is embedded into 'run_antibiotic_model.R' to:
+   - Calculate the probability of non-inferiority for an antibiotic compared to a reference antibiotic across the overall population
+   - **Reference**: define the reference antibiotic for non-inferiority analysis
+   - **delta**: define the reference delta parameter (non-ingeriority margin, here it is 20 percentage points) for a determined antibiotic compared to reference antibiotic
+
+4. **`compute_profilewise_noninfer_probabilities.R`**  
+   Provides a function that is embedded into 'run_antibiotic_model.R' to:
+   - Calculate the probability of non-inferiority for an antibiotic compared to a reference antibiotic, stratified by selected covariates from the model
+   - **Reference**: define the reference antibiotic for non-inferiority analysis
+   - **delta**: define the reference delta parameter (non-ingeriority margin, here it is 20 percentage points) for a determined antibiotic compared to reference antibiotic
